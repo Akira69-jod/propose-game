@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Forever GF?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background: radial-gradient(circle, #ff758c, #ff7eb3, #ffb199, #ff92a5);
+            background-size: 200% 200%;
+            animation: backgroundMove 5s infinite alternate ease-in-out;
+            overflow: hidden;
+        }
+        @keyframes backgroundMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            position: relative;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            transition: 0.3s ease-in-out;
+            position: relative;
+        }
+        #yesBtn {
+            background-color: lightgreen;
+        }
+        #noBtn {
+            background-color: lightcoral;
+            left: 0;
+            top: 0;
+            position: absolute;
+        }
+        .cute-animals {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+        .cute-animals img {
+            width: 80px;
+            margin: 0 10px;
+            animation: float 3s infinite alternate ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 24px;
+            color: red;
+            animation: floatUp 4s linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="question">Will you be my forever girlfriend? 💖</div>
+    <div class="buttons">
+        <button id="yesBtn" onclick="sayYes()">Yes</button>
+        <button id="noBtn" onclick="moveNo()">No</button>
+    </div>
+    <p id="response"></p>
+    
+    <div class="cute-animals">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616430.png" alt="cute cat">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" alt="cute bunny">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616409.png" alt="cute bear">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616418.png" alt="cute dog">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="cute panda">
+    </div>
+    
+    <div class="hearts" id="heartsContainer"></div>
+    
+    <script>
+        let noBtn = document.getElementById("noBtn");
+        let question = document.querySelector(".question");
+        let clickCount = 0;
+        
+        function sayYes() {
+            document.body.innerHTML = `<h1>Yayyyyy my forever gf! I love u sooo muchh! 💖🥰</h1>
+                                       <div class="hearts" id="heartsContainer"></div>
+                                       <div class="cute-animals">
+                                           <img src="https://cdn-icons-png.flaticon.com/512/616/616430.png" alt="cute cat">
+                                           <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" alt="cute bunny">
+                                           <img src="https://cdn-icons-png.flaticon.com/512/616/616409.png" alt="cute bear">
+                                           <img src="https://cdn-icons-png.flaticon.com/512/616/616418.png" alt="cute dog">
+                                           <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="cute panda">
+                                       </div>`;
+            generateHearts();
+        }
+        
+        function moveNo() {
+            clickCount++;
+            question.innerText = "Will you be my forever girlfriend? 💖" + " 😡 pls".repeat(clickCount);
+            let x = Math.random() * (window.innerWidth - 300) + 100;
+            let y = Math.random() * (window.innerHeight - 150) + 50;
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+        
+        function generateHearts() {
+            let heartsContainer = document.getElementById("heartsContainer");
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "%";
+                heart.style.animationDuration = Math.random() * 2 + 2 + "s";
+                heartsContainer.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }
+        }
+    </script>
+</body>
+</html>
